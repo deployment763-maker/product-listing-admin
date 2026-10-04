@@ -10,6 +10,7 @@ import {
   type PaintingStatus,
   type PaintingWithImages,
 } from "@painting-store/shared";
+import { DeletePaintingButton } from "@/components/DeletePaintingButton";
 import { createClient } from "@/lib/supabase/client";
 
 export function PaintingsTable({ paintings }: { paintings: PaintingWithImages[] }) {
@@ -28,29 +29,6 @@ export function PaintingsTable({ paintings }: { paintings: PaintingWithImages[] 
     setBusyId(null);
     if (updateError) {
       setError(updateError.message);
-      return;
-    }
-    router.refresh();
-  }
-
-  async function remove(painting: PaintingWithImages) {
-    if (!confirm(`Delete “${painting.title}”? This cannot be undone.`)) return;
-    setBusyId(painting.id);
-    setError("");
-    const supabase = createClient();
-    const paths = painting.painting_images
-      .map((image) => image.storage_path)
-      .filter((path): path is string => Boolean(path));
-    if (paths.length) {
-      await supabase.storage.from("paintings").remove(paths);
-    }
-    const { error: deleteError } = await supabase
-      .from("paintings")
-      .delete()
-      .eq("id", painting.id);
-    setBusyId(null);
-    if (deleteError) {
-      setError(deleteError.message);
       return;
     }
     router.refresh();
@@ -148,14 +126,7 @@ export function PaintingsTable({ paintings }: { paintings: PaintingWithImages[] 
                         Mark available
                       </button>
                     )}
-                    <button
-                      type="button"
-                      disabled={busy}
-                      onClick={() => remove(painting)}
-                      className="text-red-700 disabled:opacity-50"
-                    >
-                      Delete
-                    </button>
+                    <DeletePaintingButton painting={painting} />
                   </div>
                 </td>
               </tr>

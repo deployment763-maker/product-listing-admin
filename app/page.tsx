@@ -1,6 +1,7 @@
 import { coverImage, formatPrice, type PaintingWithImages } from "@painting-store/shared";
 import Link from "next/link";
 import { AdminShell } from "@/components/AdminShell";
+import { DeletePaintingButton } from "@/components/DeletePaintingButton";
 import { requireAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
@@ -55,12 +56,15 @@ export default async function DashboardPage() {
                     {formatPrice(painting.price, painting.currency)} · {painting.status}
                   </p>
                 </div>
-                <Link
-                  href={`/paintings/${painting.id}/edit`}
-                  className="text-sm text-slate-600 hover:underline"
-                >
-                  Edit
-                </Link>
+                <div className="flex shrink-0 flex-wrap gap-3">
+                  <Link
+                    href={`/paintings/${painting.id}/edit`}
+                    className="text-sm text-slate-600 hover:underline"
+                  >
+                    Edit
+                  </Link>
+                  <DeletePaintingButton painting={painting} />
+                </div>
               </li>
             );
           })
