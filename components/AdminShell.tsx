@@ -62,9 +62,9 @@ export function AdminShell({
         </div>
       </aside>
       <div className="md:pl-56">
-        <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 md:hidden">
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3 md:hidden">
           <p className="text-sm font-semibold">Studio admin</p>
-          <nav className="flex gap-4 text-sm">
+          <nav className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
             {nav.map((item) => (
               <Link key={item.href} href={item.href}>
                 {item.label}
