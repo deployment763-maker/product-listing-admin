@@ -62,11 +62,24 @@ export const MEDIUMS = [
 
 export const STYLES = [
   "Misc",
-  "Realism",
-  "Impressionism",
-  "Surrealism",
+  "Abstract",
+  "Cityscape",
   "Cubism",
+  "Custom Cityscape",
   "Expressionism",
+  "Floral",
+  "Impressionism",
+  "Landscape",
+  "Mandala",
+  "Modern",
+  "Nature",
+  "Portrait",
+  "Realism",
+  "Spiritual",
+  "Still Life",
+  "Surrealism",
+  "Traditional Indian",
+  "Wildlife",
 ] as const;
 
 export const DEFAULT_STYLE = "Misc" as const;
