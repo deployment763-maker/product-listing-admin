@@ -2,7 +2,7 @@
 -- Uses public Unsplash placeholders so the catalogue works before original photos are uploaded.
 
 insert into public.paintings (
-  id, title, slug, description, price, framed_price, currency, medium,
+  id, title, slug, description, price, framed_price, currency, medium, style,
   width, height, size_label, is_framed, status, featured
 ) values
 (
@@ -10,7 +10,7 @@ insert into public.paintings (
   'Monsoon',
   'monsoon',
   'Rain-soaked greens and pewter skies, painted after a long evening watching the storm settle over the trees. Layers of acrylic wash and dry brush give the surface a wet, breathing quality.',
-  5000, 7500, 'INR', 'Acrylic',
+  5000, 7500, 'INR', 'Acrylic', 'Impressionism',
   297, 420, 'A3', false, 'AVAILABLE', true
 ),
 (
@@ -18,7 +18,7 @@ insert into public.paintings (
   'Serenity',
   'serenity',
   'A quiet field of warm greys and pale gold. The composition is spare on purpose — a place for the eye to rest.',
-  7500, 10500, 'INR', 'Acrylic',
+  7500, 10500, 'INR', 'Acrylic', 'Misc',
   420, 594, 'A2', false, 'AVAILABLE', true
 ),
 (
@@ -26,7 +26,7 @@ insert into public.paintings (
   'Golden Hour',
   'golden-hour',
   'Late light across water, held in translucent watercolor. This piece has found a home.',
-  6000, 8500, 'INR', 'Watercolor',
+  6000, 8500, 'INR', 'Watercolor', 'Impressionism',
   297, 420, 'A3', true, 'SOLD', false
 ),
 (
@@ -34,7 +34,7 @@ insert into public.paintings (
   'Temple Bells',
   'temple-bells',
   'Small study in deep vermillion and soot. Suggested by the hush just after evening aarti.',
-  4500, 6500, 'INR', 'Acrylic',
+  4500, 6500, 'INR', 'Acrylic', 'Expressionism',
   210, 297, 'A4', false, 'AVAILABLE', false
 ),
 (
@@ -42,7 +42,7 @@ insert into public.paintings (
   'Quiet Garden',
   'quiet-garden',
   'Leaves, shade, and a little wildness. Watercolor on heavy paper, with a few ink notes in the undergrowth.',
-  8000, 11000, 'INR', 'Watercolor',
+  8000, 11000, 'INR', 'Watercolor', 'Realism',
   420, 594, 'A2', false, 'AVAILABLE', true
 ),
 (
@@ -50,7 +50,7 @@ insert into public.paintings (
   'River Light',
   'river-light',
   'A mixed-media riverbank: acrylic body, watercolor sky, and a thin gold line where the water turns.',
-  5500, 8000, 'INR', 'Mixed media',
+  5500, 8000, 'INR', 'Mixed media', 'Misc',
   297, 420, 'A3', false, 'AVAILABLE', false
 )
 on conflict (id) do nothing;

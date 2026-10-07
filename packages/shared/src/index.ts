@@ -11,6 +11,7 @@ export type Painting = {
   framed_price: number | null;
   currency: string;
   medium: string | null;
+  style: string | null;
   width: number | null;
   height: number | null;
   size_label: string | null;
@@ -58,6 +59,17 @@ export const MEDIUMS = [
   "Ink",
   "Mixed media",
 ] as const;
+
+export const STYLES = [
+  "Misc",
+  "Realism",
+  "Impressionism",
+  "Surrealism",
+  "Cubism",
+  "Expressionism",
+] as const;
+
+export const DEFAULT_STYLE = "Misc" as const;
 
 export function formatPrice(
   amount: number | string | null | undefined,
@@ -116,16 +128,18 @@ export function previewImages(images: PaintingImage[] | undefined): PaintingImag
 
 export function whatsappEnquiryMessage(painting: {
   title: string;
-  price: number | string;
+  price?: number | string;
   framed_price?: number | string | null;
   currency?: string;
   frameOption?: "unframed" | "framed";
 }): string {
-  const currency = painting.currency ?? "INR";
-  const isFramed = painting.frameOption === "framed" && painting.framed_price != null;
-  const amount = isFramed ? painting.framed_price : painting.price;
-  const frameNote = isFramed ? " with frame" : painting.framed_price != null ? " unframed" : "";
-  return `Hi, I'm interested in the painting "${painting.title}"${frameNote} (${formatPrice(amount, currency)}).`;
+  const isFramed = painting.frameOption === "framed";
+  const frameNote = painting.frameOption
+    ? isFramed
+      ? " with frame"
+      : " unframed"
+    : "";
+  return `Hi, I'm interested in the painting "${painting.title}"${frameNote}. Pricing is negotiable and customisable.`;
 }
 
 export function getSupabasePublicEnv(): { url: string; key: string } {

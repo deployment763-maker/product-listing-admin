@@ -12,6 +12,7 @@ create table if not exists public.paintings (
   framed_price numeric,
   currency text not null default 'INR',
   medium text,
+  style text not null default 'Misc',
   width numeric,
   height numeric,
   size_label text,

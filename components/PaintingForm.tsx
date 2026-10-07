@@ -3,8 +3,10 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
+  DEFAULT_STYLE,
   MEDIUMS,
   PAPER_SIZES,
+  STYLES,
   slugFromTitleAndDate,
   type PaintingStatus,
   type PaintingWithImages,
@@ -31,6 +33,7 @@ type FormState = {
   framedPrice: string;
   currency: string;
   medium: string;
+  style: string;
   sizeLabel: PaperSize | "";
   width: string;
   height: string;
@@ -48,6 +51,7 @@ function emptyForm(): FormState {
     framedPrice: "",
     currency: "INR",
     medium: "Acrylic",
+    style: DEFAULT_STYLE,
     sizeLabel: "A3",
     width: String(PAPER_SIZES.A3.width),
     height: String(PAPER_SIZES.A3.height),
@@ -66,6 +70,7 @@ function fromPainting(painting: PaintingWithImages): FormState {
     framedPrice: painting.framed_price != null ? String(painting.framed_price) : "",
     currency: painting.currency || "INR",
     medium: painting.medium ?? "Acrylic",
+    style: painting.style ?? DEFAULT_STYLE,
     sizeLabel: (painting.size_label as PaperSize) || "",
     width: painting.width != null ? String(painting.width) : "",
     height: painting.height != null ? String(painting.height) : "",
@@ -174,6 +179,7 @@ export function PaintingForm({ painting }: { painting?: PaintingWithImages }) {
       framed_price: framedPrice,
       currency: form.currency,
       medium: form.medium || null,
+      style: form.style || DEFAULT_STYLE,
       width: form.width ? Number(form.width) : null,
       height: form.height ? Number(form.height) : null,
       size_label: form.sizeLabel || null,
@@ -324,6 +330,20 @@ export function PaintingForm({ painting }: { painting?: PaintingWithImages }) {
             {MEDIUMS.map((medium) => (
               <option key={medium} value={medium}>
                 {medium}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Style" htmlFor="style">
+          <select
+            id="style"
+            value={form.style}
+            onChange={(event) => update("style", event.target.value)}
+            className={inputClass}
+          >
+            {STYLES.map((style) => (
+              <option key={style} value={style}>
+                {style}
               </option>
             ))}
           </select>
